@@ -3,374 +3,359 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bitácora Colombia Travels | Official Site</title>
+    <title>Bitácora Colombia Travels | Experiencias de Autor</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <style>
         :root {
             --brand-green: #1B4332;
-            --brand-gold: #A4AC86;
-            --brand-dark: #081C33;
+            --brand-dark: #0f1715;
+            --brand-light: #ffffff;
+            --accent-gold: #c5a059;
         }
 
-        body { font-family: 'Inter', sans-serif; background: #fff; color: var(--brand-dark); overflow-x: hidden; }
+        body { font-family: 'Inter', sans-serif; background: var(--brand-light); color: var(--brand-dark); overflow-x: hidden; scroll-behavior: smooth; }
         .playfair { font-family: 'Playfair Display', serif; }
 
-        /* Estética de Imagen de Fondo Oscurecida Profesional */
+        /* NAVEGACIÓN LATERAL REFINADA - OCULTA EN MÓVIL POR UX */
+        .side-nav {
+            position: fixed; right: 20px; top: 50%; transform: translateY(-50%);
+            z-index: 2000; display: flex; flex-direction: column; gap: 15px;
+            padding: 20px 10px; background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px); border-radius: 40px; border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .nav-dot {
+            width: 10px; height: 10px; background: rgba(0,0,0,0.1); 
+            border-radius: 50%; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+            position: relative; cursor: pointer;
+        }
+        
+        .nav-dot.active { background: var(--brand-green); transform: scale(1.4); }
+        
+        /* WHATSAPP FLOAT - TAMAÑO ESTÁNDAR */
+        .whatsapp-float {
+            position: fixed; bottom: 30px; right: 30px; z-index: 2000;
+            background: #25D366; color: white; width: 56px; height: 56px;
+            border-radius: 50%; display: flex; align-items: center; justify-center;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease; cursor: pointer;
+        }
+        .whatsapp-float:hover { transform: scale(1.05) translateY(-5px); }
+
+        /* HERO SCALE & ANIMATION */
         .hero-overlay {
-            background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.4), rgba(0,0,0,0.7));
+            background: linear-gradient(to bottom, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0.95) 100%);
             position: absolute; inset: 0; z-index: 10;
         }
-
-        /* Slider de fondo suave */
         .hero-bg {
-            position: absolute; inset: 0; 
-            background-size: cover; background-position: center;
-            animation: slowZoom 20s infinite alternate;
-            z-index: 1;
+            position: absolute; inset: 0; background-size: cover; background-position: center;
+            animation: slowZoom 40s infinite alternate; z-index: 1;
         }
+        @keyframes slowZoom { from { transform: scale(1); } to { transform: scale(1.15); } }
 
-        @keyframes slowZoom { from { transform: scale(1); } to { transform: scale(1.1); } }
-
-        /* Glassmorphism para elementos UI */
-        .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
-        
-        /* Animaciones de Scroll */
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        /* REVEAL SYSTEM */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
+        
+        /* CARD SYSTEM */
+        .glass-card { background: white; border: 1px solid rgba(0,0,0,0.04); transition: all 0.4s ease; }
+        .glass-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.04); }
 
-        /* Audio Bars */
-        .audio-visualizer { display: flex; align-items: flex-end; gap: 2px; height: 16px; cursor: pointer; }
-        .bar { width: 3px; background: #fff; border-radius: 2px; transition: height 0.2s; }
-        .playing .bar { animation: bar-dance 0.8s infinite alternate; }
-        @keyframes bar-dance { from { height: 4px; } to { height: 100%; } }
+        .audio-visualizer { display: flex; align-items: flex-end; gap: 2px; height: 18px; cursor: pointer; }
+        .bar { width: 2px; background: var(--brand-dark); border-radius: 1px; }
+        .playing .bar { animation: dance 0.6s infinite alternate; }
+        @keyframes dance { from { height: 2px; } to { height: 100%; } }
 
-        /* Responsividad Mobile */
-        @media (max-width: 768px) {
-            .hero-title { font-size: 3.5rem !important; line-height: 1; }
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+
+        /* RESPONSIVE OVERRIDES */
+        @media (max-width: 1024px) { 
+            .side-nav { display: none; }
+            .whatsapp-float { bottom: 20px; right: 20px; width: 50px; height: 50px; }
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased selection:bg-emerald-100">
 
-    <!-- OVERLAY DE CARGA / INICIO -->
-    <div id="welcome-gate" class="fixed inset-0 z-[2000] bg-black flex items-center justify-center transition-transform duration-1000">
-        <div class="text-center px-6">
-            <h2 class="text-white text-5xl md:text-7xl playfair italic mb-8 opacity-0 animate-[fadeIn_1.5s_ease-out_forwards]">Bitácora</h2>
-            <button onclick="unlockExperience()" class="group relative px-10 py-4 overflow-hidden border border-white/30 rounded-full transition-all hover:border-white">
-                <span class="relative z-10 text-white text-[10px] tracking-[0.5em] uppercase font-bold">Iniciar Inmersión</span>
-                <div class="absolute inset-0 bg-white scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></div>
-                <span class="absolute inset-0 flex items-center justify-center text-black opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-[10px] font-bold uppercase tracking-[0.5em]">Entrar</span>
-            </button>
-        </div>
-    </div>
+    <!-- NAVEGACIÓN LATERAL (SÓLO DESKTOP) -->
+    <nav class="side-nav" id="side-navigation">
+        <a href="#inicio" class="nav-dot active" data-section="inicio"></a>
+        <a href="#propuesta" class="nav-dot" data-section="propuesta"></a>
+        <a href="#destinos" class="nav-dot" data-section="destinos"></a>
+        <a href="#servicios" class="nav-dot" data-section="servicios"></a>
+        <a href="#contacto" class="nav-dot" data-section="contacto"></a>
+    </nav>
 
-    <!-- AUDIO -->
+    <!-- WHATSAPP -->
+    <a href="https://wa.me/573114567890" target="_blank" class="whatsapp-float" aria-label="Contactar por WhatsApp">
+        <svg class="w-7 h-7 mx-auto" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+
     <audio id="main-audio" loop preload="auto">
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- UI PRINCIPAL -->
-    <div id="app-container" class="opacity-0 transition-opacity duration-1000">
-        
-        <!-- NAVEGACIÓN -->
-        <nav class="fixed top-0 w-full z-[100] transition-all duration-500 py-6 px-6 md:px-16 flex justify-between items-center text-white" id="main-nav">
-            <div class="flex items-center gap-3">
-                <span class="playfair text-2xl font-bold tracking-tighter">B.</span>
-                <span class="text-[10px] font-bold tracking-[0.4em] uppercase hidden sm:block">Bitácora Colombia</span>
+    <div id="app-container">
+        <!-- BARRA DE NAVEGACIÓN -->
+        <nav class="fixed top-0 w-full z-[100] transition-all duration-500 py-6 md:py-8 lg:py-10 px-6 md:px-12 lg:px-20 flex justify-between items-center text-black" id="main-nav">
+            <div class="flex items-center gap-4 lg:gap-6">
+                <span class="playfair text-3xl lg:text-4xl font-bold italic tracking-tighter">B.</span>
+                <div class="h-6 w-[1px] bg-black/10 hidden md:block"></div>
+                <span class="text-[9px] lg:text-[10px] font-bold tracking-[0.6em] uppercase hidden sm:block">Bitácora Colombia Travels</span>
             </div>
             
-            <div class="hidden lg:flex gap-10 text-[10px] font-bold uppercase tracking-[0.3em]">
-                <a href="#destinos" class="hover:opacity-50 transition">Destinos</a>
-                <a href="#manifiesto" class="hover:opacity-50 transition">Manifiesto</a>
-                <a href="#contacto" class="hover:opacity-50 transition">Agendar</a>
+            <div class="hidden lg:flex gap-12 text-[10px] font-bold uppercase tracking-[0.4em]">
+                <a href="#inicio" class="hover:text-amber-800 transition-colors">Inicio</a>
+                <a href="#destinos" class="hover:text-amber-800 transition-colors">Destinos</a>
+                <a href="#servicios" class="hover:text-amber-800 transition-colors">Servicios</a>
+                <a href="#contacto" class="hover:text-amber-800 transition-colors">Contacto</a>
             </div>
 
-            <div class="flex items-center gap-8">
-                <div onclick="toggleAudio()" id="visualizer" class="audio-visualizer">
-                    <div class="bar h-2"></div>
-                    <div class="bar h-4"></div>
-                    <div class="bar h-3"></div>
-                </div>
-                <button class="lg:hidden text-white" onclick="toggleMenu()">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-                </button>
+            <div onclick="toggleAudio()" id="visualizer" class="audio-visualizer group">
+                <span class="text-[8px] uppercase tracking-widest mr-3 opacity-0 group-hover:opacity-40 transition-opacity hidden sm:block">Atmósfera</span>
+                <div class="bar h-2"></div>
+                <div class="bar h-4"></div>
+                <div class="bar h-3"></div>
             </div>
         </nav>
 
-        <!-- HERO SECTION (VISUAL PRINCIPAL) -->
-        <header class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-black">
-            <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1590604543026-620436858e72?auto=format&fit=crop&q=80&w=2000');"></div>
+        <!-- HERO SECTION -->
+        <header id="inicio" class="relative h-[90vh] md:h-screen w-full flex items-center overflow-hidden bg-white">
+            <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1590244439050-08e150931131?auto=format&fit=crop&q=80&w=2000');"></div>
             <div class="hero-overlay"></div>
-            
-            <div class="relative z-20 text-center px-6 max-w-5xl">
-                <p class="text-white/60 text-[11px] uppercase tracking-[0.6em] mb-6 animate-[fadeInDown_1s_ease-out]">Curaduría de Viajes Boutique</p>
-                <h1 class="hero-title text-white text-6xl md:text-9xl playfair font-bold mb-10 leading-[0.9] italic animate-[fadeIn_1.5s_ease-out]">Colombia Inexplicable.</h1>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <a href="#destinos" class="w-full sm:w-auto px-10 py-4 bg-white text-black text-[10px] font-bold uppercase tracking-widest rounded-full hover:bg-emerald-50 transition shadow-2xl">Explorar Bitácoras</a>
-                    <a href="#contacto" class="w-full sm:w-auto px-10 py-4 border border-white/30 text-white text-[10px] font-bold uppercase tracking-widest rounded-full hover:bg-white/10 transition backdrop-blur-sm">Consultar Concierge</a>
+            <div class="relative z-20 px-6 md:px-12 lg:px-24 w-full max-w-[1600px] mx-auto">
+                <div class="mb-6 md:mb-8 overflow-hidden">
+                    <p class="text-emerald-900 font-medium text-[10px] md:text-[12px] uppercase tracking-[0.6em] md:tracking-[1em] translate-y-full animate-[slideUp_1s_ease-out_forwards]">Experiencias de autor en Colombia</p>
                 </div>
-            </div>
-
-            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 animate-bounce opacity-40">
-                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 14l-7 7-7-7m14-8l-7 7-7-7"></path></svg>
+                <h1 class="text-black text-5xl md:text-7xl lg:text-8xl xl:text-[8.5rem] playfair font-bold mb-10 md:mb-12 leading-[1.1] md:leading-[0.85] tracking-tight">
+                    El arte de <br class="hidden md:block"><span class="italic font-normal">viajar despacio.</span>
+                </h1>
+                <div class="flex flex-col sm:flex-row gap-6 md:gap-8 items-start sm:items-center">
+                    <a href="#destinos" class="w-full sm:w-auto text-center group px-10 md:px-16 py-5 md:py-7 bg-black text-white text-[10px] md:text-[11px] font-bold uppercase tracking-[0.3em] rounded-full hover:bg-emerald-950 transition-all flex items-center justify-center gap-4">
+                        Descubrir
+                        <div class="w-1.5 h-1.5 bg-white rounded-full group-hover:scale-[2.5] transition-transform"></div>
+                    </a>
+                    <span class="text-gray-400 text-[11px] md:text-xs italic playfair max-w-xs">Curaduría exclusiva para el viajero contemporáneo.</span>
+                </div>
             </div>
         </header>
 
-        <!-- SECCIÓN DESTINOS (RESPONSIVE GRID) -->
-        <section id="destinos" class="py-24 md:py-40 px-6 md:px-16 bg-white">
-            <div class="max-w-7xl mx-auto">
-                <div class="mb-20 reveal">
-                    <h2 class="text-4xl md:text-6xl playfair font-bold mb-6">Nuestras Rutas</h2>
-                    <p class="text-gray-400 max-w-xl text-lg font-light leading-relaxed">Cada itinerario es una pieza única de artesanía territorial, diseñada para conectar con la esencia del país.</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12" id="grid-destinos">
-                    <!-- Inyección vía JavaScript -->
-                </div>
-            </div>
-        </section>
-
-        <!-- SECCIÓN MANIFIESTO (QUIENES SOMOS) -->
-        <section id="manifiesto" class="py-24 bg-[#050A0E] text-white overflow-hidden relative">
-            <div class="absolute top-0 right-0 w-1/3 h-full bg-emerald-950/20 blur-[120px] rounded-full translate-x-1/2"></div>
-            <div class="max-w-7xl mx-auto px-6 md:px-16 grid lg:grid-cols-2 gap-20 items-center">
-                <div class="reveal">
-                    <span class="text-emerald-500 text-[10px] font-bold uppercase tracking-[0.4em] mb-6 block">Sobre Bitácora</span>
-                    <h3 class="text-4xl md:text-5xl playfair italic font-bold mb-10 leading-tight">No vendemos tures,<br>abrimos puertas al territorio.</h3>
-                    <p class="text-white/60 text-lg leading-relaxed mb-12 font-light">
-                        Creemos que el verdadero lujo hoy es el tiempo y el acceso. Por eso, nuestra agencia se especializa en rincones que no aparecen en las guías, trabajando de la mano con comunidades locales para asegurar un turismo regenerativo y consciente.
-                    </p>
-                    <div class="grid grid-cols-2 gap-10">
-                        <div>
-                            <p class="text-3xl font-bold mb-2">24+</p>
-                            <p class="text-[9px] uppercase tracking-widest opacity-40">Rutas de Autor</p>
+        <!-- PROPUESTA DE VALOR -->
+        <section id="propuesta" class="py-24 md:py-40 bg-white">
+            <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-32 items-center">
+                    <div class="reveal">
+                        <span class="text-amber-600 text-[10px] font-bold uppercase tracking-[0.5em] mb-6 block">Nuestra Esencia</span>
+                        <h2 class="text-4xl md:text-6xl lg:text-7xl playfair font-bold mb-8 md:mb-10 leading-tight">No diseñamos viajes, <span class="italic font-normal">creamos legados.</span></h2>
+                        <p class="text-gray-500 text-base md:text-lg font-light leading-relaxed mb-10">
+                            En <strong>Bitácora Colombia Travels</strong>, operamos bajo la premisa del lujo consciente. Nos alejamos de las masas para ofrecerle acceso a territorios vírgenes, donde la exclusividad se mide en la calidad de las conexiones humanas y la preservación del entorno.
+                        </p>
+                        <div class="grid grid-cols-2 gap-6 md:gap-10">
+                            <div class="border-l border-gray-100 pl-6">
+                                <h4 class="text-2xl md:text-3xl playfair font-bold text-emerald-900">24/7</h4>
+                                <p class="text-[9px] uppercase tracking-widest text-gray-400 font-bold">Global Support</p>
+                            </div>
+                            <div class="border-l border-gray-100 pl-6">
+                                <h4 class="text-2xl md:text-3xl playfair font-bold text-emerald-900">Elite</h4>
+                                <p class="text-[9px] uppercase tracking-widest text-gray-400 font-bold">Network</p>
+                            </div>
                         </div>
-                        <div>
-                            <p class="text-3xl font-bold mb-2">100%</p>
-                            <p class="text-[9px] uppercase tracking-widest opacity-40">Impacto Local</p>
+                    </div>
+                    <div class="relative reveal mt-12 lg:mt-0">
+                        <div class="rounded-[2.5rem] md:rounded-[4rem] overflow-hidden shadow-xl lg:rotate-2 hover:rotate-0 transition-transform duration-700 aspect-[4/5] lg:aspect-auto lg:h-[600px]">
+                            <img src="https://images.unsplash.com/photo-1516422213484-219586f34bd1?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover" alt="Viaje de lujo en Colombia">
+                        </div>
+                        <div class="absolute -bottom-6 -left-6 bg-black text-white p-8 md:p-10 rounded-[2rem] hidden md:block max-w-xs shadow-2xl">
+                            <p class="playfair italic text-lg leading-snug">"Donde el silencio se convierte en la mejor banda sonora."</p>
                         </div>
                     </div>
                 </div>
-                <div class="reveal relative h-[400px] md:h-[600px]">
-                    <img src="https://images.unsplash.com/photo-1596120497515-992a7c59ffb3?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover rounded-3xl grayscale hover:grayscale-0 transition-all duration-1000 shadow-2xl">
+            </div>
+        </section>
+
+        <!-- DESTINOS GRID -->
+        <section id="destinos" class="py-24 md:py-40 px-6 md:px-12 lg:px-20 bg-[#fafafa]">
+            <div class="max-w-[1400px] mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-24 reveal">
+                    <div class="max-w-xl">
+                        <h2 class="text-5xl md:text-6xl playfair font-bold mb-6">La Colección.</h2>
+                        <p class="text-gray-400 font-light text-sm md:text-base">Una selección rigurosa de coordenadas donde la naturaleza y la cultura convergen en perfecta armonía.</p>
+                    </div>
+                    <a href="#" class="mt-8 md:mt-0 text-[10px] font-bold uppercase tracking-[0.3em] border-b border-black/10 pb-2 hover:border-black transition-all">Explorar Catálogo</a>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12" id="grid-destinos">
+                    <!-- Dinámico vía JS -->
                 </div>
             </div>
         </section>
 
-        <!-- SECCIÓN CONTACTO / HORARIOS -->
-        <section id="contacto" class="py-24 px-6 md:px-16 bg-white">
-            <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-20">
-                <div class="lg:w-1/2 reveal">
-                    <h4 class="text-4xl playfair font-bold mb-8">Empieza tu bitácora hoy.</h4>
-                    <div class="space-y-6">
-                        <p class="text-gray-400 text-sm uppercase tracking-widest">Contacto Directo</p>
-                        <p class="text-3xl md:text-5xl font-light italic border-b border-gray-100 pb-4" id="ui-phone"></p>
-                        <p class="text-3xl md:text-5xl font-light italic border-b border-gray-100 pb-4" id="ui-email"></p>
-                    </div>
+        <!-- SERVICIOS -->
+        <section id="servicios" class="py-24 md:py-40 bg-white px-6 md:px-12 lg:px-20">
+            <div class="max-w-[1400px] mx-auto">
+                <div class="text-center mb-16 md:mb-24 reveal">
+                    <span class="text-amber-600 text-[10px] font-bold uppercase tracking-[0.5em] mb-4 block">Estándar Bitácora</span>
+                    <h2 class="text-4xl md:text-5xl playfair font-bold">Servicios de Autor</h2>
                 </div>
-                <div class="lg:w-1/2 bg-gray-50 p-10 md:p-16 rounded-[40px] reveal">
-                    <h5 class="text-[10px] font-bold uppercase tracking-[0.4em] text-emerald-800 mb-8">Horarios de Concierge</h5>
-                    <div id="ui-horarios" class="space-y-6">
-                        <!-- Inyección vía JavaScript -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                    <div class="glass-card p-10 md:p-12 rounded-[2rem] md:rounded-[3rem] reveal">
+                        <div class="text-emerald-900 mb-6">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h4 class="font-bold text-[12px] uppercase tracking-widest mb-4">Concierge 24/7</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed font-light">Respuesta inmediata a cualquier requerimiento, garantizando fluidez total en su itinerario.</p>
                     </div>
-                    <div class="mt-16 pt-8 border-t border-gray-200">
-                        <p class="text-[9px] text-gray-400 uppercase tracking-widest mb-2">Sede Administrativa</p>
-                        <p class="text-sm font-medium" id="ui-address"></p>
+                    <div class="glass-card p-10 md:p-12 rounded-[2rem] md:rounded-[3rem] reveal" style="transition-delay: 0.1s">
+                        <div class="text-emerald-900 mb-6">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5"></path></svg>
+                        </div>
+                        <h4 class="font-bold text-[12px] uppercase tracking-widest mb-4">Refugios Boutique</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed font-light">Propiedades inspeccionadas personalmente que aseguran privacidad y confort absoluto.</p>
+                    </div>
+                    <div class="glass-card p-10 md:p-12 rounded-[2rem] md:rounded-[3rem] reveal" style="transition-delay: 0.2s">
+                        <div class="text-emerald-900 mb-6">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                        <h4 class="font-bold text-[12px] uppercase tracking-widest mb-4">Movilidad Élite</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed font-light">Desde camionetas de alto nivel hasta traslados aéreos privados en todo el territorio.</p>
+                    </div>
+                    <div class="glass-card p-10 md:p-12 rounded-[2rem] md:rounded-[3rem] reveal" style="transition-delay: 0.3s">
+                        <div class="text-emerald-900 mb-6">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"></path></svg>
+                        </div>
+                        <h4 class="font-bold text-[12px] uppercase tracking-widest mb-4">Eco-Conciencia</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed font-light">Viajes diseñados para mitigar la huella de carbono y fortalecer la cultura local.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- FOOTER -->
-        <footer class="py-12 border-t border-gray-100 text-center text-gray-300">
-            <p class="text-[9px] uppercase tracking-[0.6em]">Bitácora Travels &copy; 2024 | RNT 54321 | All Rights Reserved</p>
+        <!-- CONTACTO -->
+        <section id="contacto" class="py-24 md:py-40 bg-[#0f1715] text-white px-6 md:px-12 lg:px-20 overflow-hidden">
+            <div class="max-w-[1400px] mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-32">
+                    <div class="reveal">
+                        <h2 class="text-5xl md:text-7xl lg:text-8xl playfair font-bold mb-12 leading-tight">Diseñemos <br><span class="italic font-normal">tu bitácora.</span></h2>
+                        <div class="space-y-10 md:space-y-12">
+                            <div>
+                                <p class="text-[9px] uppercase tracking-[0.4em] text-white/30 mb-3">Consultoría Privada</p>
+                                <a href="mailto:experiencias@bitacoracolombia.travel" class="text-xl md:text-3xl font-light hover:text-amber-500 transition-colors break-words">experiencias@bitacoracolombia.travel</a>
+                            </div>
+                            <div>
+                                <p class="text-[9px] uppercase tracking-[0.4em] text-white/30 mb-3">Llamada Directa</p>
+                                <p class="text-2xl md:text-3xl font-light">+57 311 456 7890</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white/5 p-8 md:p-16 rounded-[2.5rem] md:rounded-[4rem] backdrop-blur-sm reveal">
+                        <h4 class="text-[10px] font-bold uppercase tracking-[0.5em] mb-10 text-amber-500">Colombia Headquarters</h4>
+                        <div id="ui-horarios" class="space-y-8 mb-12 md:mb-16"></div>
+                        <div>
+                            <p class="text-white/30 text-[9px] uppercase tracking-[0.4em] mb-4">Ubicación</p>
+                            <p class="text-lg md:text-xl font-light leading-relaxed">Calle 80 #11-42, Edificio El Nogal<br>Bogotá D.C., Colombia</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="py-12 md:py-20 bg-[#0f1715] text-center border-t border-white/5">
+            <p class="text-[9px] text-white/20 uppercase tracking-[0.6em] px-6">Bitácora Colombia Travels &copy; 2024 | RNT 45291</p>
         </footer>
     </div>
 
-    <!-- WHATSAPP WIDGET SENIOR -->
-    <div class="fixed bottom-6 right-6 z-[500]">
-        <div id="wa-card" class="hidden absolute bottom-20 right-0 w-[300px] bg-white rounded-3xl shadow-2xl overflow-hidden animate-[pop_0.4s_cubic-bezier(0.175,0.885,0.32,1.275)]">
-            <div class="bg-emerald-950 p-6 text-white flex items-center gap-3">
-                <div class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center font-bold">B</div>
-                <div>
-                    <p class="text-xs font-bold">Bitácora Concierge</p>
-                    <p class="text-[9px] opacity-60">Suele responder al instante</p>
-                </div>
-            </div>
-            <div class="p-6 bg-gray-50 space-y-4">
-                <div id="wa-dots" class="flex gap-1 text-emerald-800">
-                    <span class="w-1.5 h-1.5 bg-current rounded-full animate-bounce"></span>
-                    <span class="w-1.5 h-1.5 bg-current rounded-full animate-bounce [animation-delay:0.2s]"></span>
-                    <span class="w-1.5 h-1.5 bg-current rounded-full animate-bounce [animation-delay:0.4s]"></span>
-                </div>
-                <div id="wa-msg" class="hidden bg-white p-4 rounded-2xl rounded-tl-none shadow-sm text-[13px] text-gray-700 leading-relaxed">
-                    Hola viajero 👋. Estoy aquí para diseñar tu ruta personalizada por Colombia. ¿Tienes algún destino en mente?
-                </div>
-            </div>
-            <div class="p-4 bg-white">
-                <button onclick="gotoWhatsApp()" class="w-full bg-[#25D366] text-white py-3 rounded-2xl font-bold text-xs uppercase tracking-widest hover:brightness-110 transition">Iniciar Conversación</button>
-            </div>
-        </div>
-        <button onclick="toggleWA()" class="w-16 h-16 bg-[#25D366] rounded-full shadow-2xl flex items-center justify-center text-white hover:scale-110 transition duration-300">
-            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.181-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.747-2.874-2.512-2.96-2.626-.087-.115-.708-.941-.708-1.793 0-.852.441-1.271.598-1.444.157-.173.342-.217.456-.217l.327.004c.119.002.278-.045.434.331.161.389.55 1.345.597 1.441.048.097.081.209.016.339-.066.13-.1.21-.199.324-.1.115-.208.256-.298.344-.1.097-.202.202-.087.401.115.199.511.843 1.1 1.368.758.677 1.396.887 1.596.985.199.099.314.083.43-.05.115-.133.496-.576.629-.773.133-.197.265-.165.447-.099.183.066 1.159.547 1.358.646.199.099.331.148.379.231.049.083.049.48-.095.885z"/></svg>
-        </button>
-    </div>
-
     <script>
-        // SINGLE SOURCE OF TRUTH (JSON DATA)
         const SITE_DATA = {
-            agency: {
-                phone: "+57 311 456 7890",
-                email: "concierge@bitacora.com",
-                address: "Calle 80 #11-42, Bogotá, Colombia"
-            },
             destinos: [
-                {
-                    nombre: "Chocó: Entre Selva y Mar",
-                    tag: "Costa Pacífica",
-                    img: "https://images.unsplash.com/photo-1599341624523-28952084b6f1?auto=format&fit=crop&q=80&w=800",
-                    price: "Desde $3.2M"
-                },
-                {
-                    nombre: "Desierto de la Tatacoa",
-                    tag: "Mística Estelar",
-                    img: "https://images.unsplash.com/photo-1594911136155-274e0d9b1836?auto=format&fit=crop&q=80&w=800",
-                    price: "Desde $1.8M"
-                },
-                {
-                    nombre: "Páramos de Boyacá",
-                    tag: "Lujo Andino",
-                    img: "https://images.unsplash.com/photo-1583997052301-0042b33fc598?auto=format&fit=crop&q=80&w=800",
-                    price: "Desde $2.1M"
-                }
+                { nombre: "Amazonía Sagrada", tag: "Amazonas", img: "https://images.unsplash.com/photo-1596401057633-531035ef2300?auto=format&fit=crop&q=80&w=800", price: "Desde $1,200 USD" },
+                { nombre: "El Santuario de Sal", tag: "Cundinamarca", img: "https://images.unsplash.com/photo-1589909202802-8f4aadce1849?auto=format&fit=crop&q=80&w=800", price: "Desde $450 USD" },
+                { nombre: "Sierra Nevada", tag: "Santa Marta", img: "https://images.unsplash.com/photo-1548810901-7009477e8131?auto=format&fit=crop&q=80&w=800", price: "Desde $1,850 USD" }
             ],
-            horarios: [
-                { label: "Atención Digital", value: "24 / 7" },
-                { label: "Oficina Boutique", value: "Lun - Vie | 9:00 - 18:00" }
+            horarios: [ 
+                { label: "Concierge Digital", value: "24/7 Inmediato" }, 
+                { label: "Oficina Bogotá", value: "Lun - Sáb | 8:00 - 19:00" } 
             ]
         };
 
         const audio = document.getElementById('main-audio');
         let playing = false;
 
-        // INICIO DE EXPERIENCIA
-        function unlockExperience() {
-            document.getElementById('welcome-gate').style.transform = "translateY(-100%)";
-            document.getElementById('app-container').classList.remove('opacity-0');
-            
-            // Iniciar Audio
-            audio.play().then(() => {
-                playing = true;
-                document.getElementById('visualizer').classList.add('playing');
-            }).catch(e => console.warn("Interacción requerida para audio"));
-            
-            renderData();
+        window.onload = function() {
+            renderContent();
+            initScrollLogic();
             initAnimations();
-        }
+        };
 
-        // RENDERIZADO DINÁMICO
-        function renderData() {
-            // Textos básicos
-            document.getElementById('ui-phone').innerText = SITE_DATA.agency.phone;
-            document.getElementById('ui-email').innerText = SITE_DATA.agency.email;
-            document.getElementById('ui-address').innerText = SITE_DATA.agency.address;
-
-            // Destinos
+        function renderContent() {
             const grid = document.getElementById('grid-destinos');
             SITE_DATA.destinos.forEach(d => {
                 grid.innerHTML += `
                     <div class="reveal group cursor-pointer">
-                        <div class="relative aspect-[3/4] overflow-hidden rounded-3xl mb-6 shadow-sm">
-                            <img src="${d.img}" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-8 flex flex-col justify-end">
-                                <span class="text-white/60 text-[9px] uppercase tracking-widest mb-2">${d.tag}</span>
-                                <button class="bg-white text-black py-3 rounded-full text-[10px] font-bold uppercase tracking-[0.2em]">Ver Bitácora</button>
-                            </div>
+                        <div class="relative aspect-[4/5] sm:aspect-[3/4] overflow-hidden rounded-[2rem] md:rounded-[3rem] mb-6 shadow-sm">
+                            <img src="${d.img}" class="w-full h-full object-cover transition duration-1000 group-hover:scale-110" alt="${d.nombre}">
+                            <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
                         </div>
-                        <h4 class="text-2xl font-bold playfair mb-2">${d.nombre}</h4>
-                        <div class="flex justify-between items-center text-[10px] font-bold uppercase tracking-widest text-gray-400">
-                            <span>Colombia</span>
-                            <span class="text-emerald-800">${d.price}</span>
-                        </div>
-                    </div>
-                `;
+                        <p class="text-[8px] md:text-[9px] font-bold uppercase tracking-[0.4em] text-amber-700 mb-2">${d.tag}</p>
+                        <h4 class="text-2xl md:text-3xl font-bold playfair mb-2">${d.nombre}</h4>
+                        <p class="text-[9px] text-gray-400 font-medium tracking-widest">${d.price}</p>
+                    </div>`;
             });
 
-            // Horarios
             const hCont = document.getElementById('ui-horarios');
             SITE_DATA.horarios.forEach(h => {
                 hCont.innerHTML += `
-                    <div class="flex justify-between items-center border-b border-gray-200 pb-3">
-                        <span class="text-xs text-gray-400 uppercase tracking-widest">${h.label}</span>
-                        <span class="text-sm font-bold italic playfair">${h.value}</span>
-                    </div>
-                `;
+                    <div class="flex flex-col sm:flex-row justify-between border-b border-white/10 pb-5 gap-2">
+                        <span class="text-[9px] text-white/40 font-bold uppercase tracking-widest">${h.label}</span>
+                        <span class="italic playfair font-medium text-white sm:text-right">${h.value}</span>
+                    </div>`;
             });
         }
 
-        // ANIMACIONES & SCROLL
-        function initAnimations() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(e => {
-                    if(e.isIntersecting) e.target.classList.add('active');
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
+        function initScrollLogic() {
+            const sections = document.querySelectorAll('header, section');
+            const navDots = document.querySelectorAll('.nav-dot');
+            const mainNav = document.getElementById('main-nav');
 
             window.addEventListener('scroll', () => {
-                const nav = document.getElementById('main-nav');
-                if(window.scrollY > 100) {
-                    nav.classList.add('glass', 'text-black', 'py-4', 'shadow-sm');
-                    nav.classList.remove('text-white', 'py-6');
+                let current = "inicio";
+                sections.forEach(s => {
+                    if (window.pageYOffset >= s.offsetTop - 300) current = s.id;
+                });
+
+                navDots.forEach(d => {
+                    d.classList.remove('active');
+                    if (d.dataset.section === current) d.classList.add('active');
+                });
+
+                if (window.scrollY > 50) {
+                    mainNav.classList.add('bg-white/95', 'backdrop-blur-md', 'py-4', 'shadow-sm');
+                    mainNav.classList.remove('py-6', 'md:py-8', 'lg:py-10');
                 } else {
-                    nav.classList.remove('glass', 'text-black', 'py-4', 'shadow-sm');
-                    nav.classList.add('text-white', 'py-6');
+                    mainNav.classList.remove('bg-white/95', 'backdrop-blur-md', 'py-4', 'shadow-sm');
+                    mainNav.classList.add('py-6', 'md:py-8', 'lg:py-10');
                 }
             });
         }
 
-        // AUDIO CONTROL
+        function initAnimations() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
+            }, { threshold: 0.05 });
+            document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
+        }
+
         function toggleAudio() {
-            const vis = document.getElementById('visualizer');
-            if(playing) {
+            if (!playing) {
+                audio.play().then(() => {
+                    playing = true;
+                    document.getElementById('visualizer').classList.add('playing');
+                }).catch(() => console.log("User interaction required"));
+            } else {
                 audio.pause();
-                vis.classList.remove('playing');
-            } else {
-                audio.play();
-                vis.classList.add('playing');
+                document.getElementById('visualizer').classList.remove('playing');
+                playing = false;
             }
-            playing = !playing;
-        }
-
-        // WHATSAPP UI
-        function toggleWA() {
-            const card = document.getElementById('wa-card');
-            const isHidden = card.classList.contains('hidden');
-            
-            if(isHidden) {
-                card.classList.remove('hidden');
-                setTimeout(() => {
-                    document.getElementById('wa-dots').classList.add('hidden');
-                    document.getElementById('wa-msg').classList.remove('hidden');
-                    document.getElementById('wa-msg').classList.add('animate-[fadeIn_0.5s]');
-                }, 1500);
-            } else {
-                card.classList.add('hidden');
-            }
-        }
-
-        function gotoWhatsApp() {
-            const tel = SITE_DATA.agency.phone.replace(/\+/g, '').replace(/\s/g, '');
-            window.open(`https://wa.me/${tel}?text=Hola Bitácora. Quisiera solicitar una consultoría para mi próximo viaje por Colombia.`, '_blank');
         }
     </script>
-
-    <style>
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes pop { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
-    </style>
 </body>
 </html>
