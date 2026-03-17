@@ -1,17 +1,26 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Bitácora Colombia Travels - Experiencias de autor en Colombia. Viajes personalizados, destinos exclusivos y servicios de lujo consciente.">
+    <meta name="description"
+        content="Bitácora Colombia Travels - Experiencias de autor en Colombia. Viajes personalizados, Experiencias exclusivos y servicios de lujo consciente.">
     <meta name="keywords" content="viajes Colombia, travel, tourism, luxury, experiencias">
     <meta property="og:title" content="Bitácora Colombia Travels | Experiencias de Autor">
-    <meta property="og:description" content="Curaduría exclusiva para el viajero contemporáneo. Destinos vírgenes y conexiones humanas auténticas.">
+    <meta property="og:description"
+        content="Curaduría exclusiva para el viajero contemporáneo. Experiencias vírgenes y conexiones humanas auténticas.">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1590244439050-08e150931131?auto=format&fit=crop&q=80&w=1200">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" as="style">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <meta property="og:image"
+        content="https://images.unsplash.com/photo-1590244439050-08e150931131?auto=format&fit=crop&q=80&w=1200">
+    <link rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        as="style">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
     <title>Bitácora Colombia Travels | Experiencias de Autor</title>
+    <link rel="icon" type="image/x-icon" href="img/bitacora_logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
@@ -21,117 +30,286 @@
             --accent-gold: #c5a059;
         }
 
-        body { font-family: 'Inter', sans-serif; background: var(--brand-light); color: var(--brand-dark); overflow-x: hidden; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-        img { max-width: 100%; height: auto; display: block; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--brand-light);
+            color: var(--brand-dark);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
 
         /* NAVEGACIÓN LATERAL REFINADA - OCULTA EN MÓVIL POR UX */
         .side-nav {
-            position: fixed; right: 20px; top: 50%; transform: translateY(-50%);
-            z-index: 2000; display: flex; flex-direction: column; gap: 15px;
-            padding: 20px 10px; background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px); border-radius: 40px; border: 1px solid rgba(0,0,0,0.05);
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 20px 10px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 40px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
             will-change: transform;
         }
-        
+
         .nav-dot {
-            width: 10px; height: 10px; background: rgba(0,0,0,0.1); 
-            border-radius: 50%; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
-            position: relative; cursor: pointer;
+            width: 10px;
+            height: 10px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            cursor: pointer;
         }
-        
-        .nav-dot.active { background: var(--brand-green); transform: scale(1.4); }
-        
+
+        .nav-dot.active {
+            background: var(--brand-green);
+            transform: scale(1.4);
+        }
+
         /* WHATSAPP FLOAT - TAMAÑO ESTÁNDAR */
         .whatsapp-float {
-            position: fixed; bottom: 30px; right: 30px; z-index: 2000;
-            background: #25D366; color: white; width: 56px; height: 56px;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 2000;
+            background: #25D366;
+            color: white;
+            width: 56px;
+            height: 56px;
             box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
-            transition: all 0.3s ease; cursor: pointer; border: none; padding: 0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            padding: 0;
             will-change: transform;
             border-radius: 50%;
         }
-        .whatsapp-float:hover { transform: scale(1.05) translateY(-5px); }
+
+        .whatsapp-float:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
 
         /* HERO SCALE & ANIMATION */
-.hero-overlay {
-    /* Gradiente blanco con diferentes opacidades */
-    background: linear-gradient(
-        to bottom, 
-        rgba(255, 255, 255, 0.7) 0%, 
-        rgba(255, 255, 255, 0.3) 50%, 
-        rgba(255, 255, 255, 0.9) 100%
-    );
+        .hero-overlay {
+            /* Gradiente blanco con diferentes opacidades */
+            background: linear-gradient(to bottom,
+                    rgba(0, 0, 0, 0.7) 0%,
+                    rgba(0, 0, 0, 0.3) 50%,
+                    rgba(0, 0, 0, 0.9) 100%);
 
-    /* El truco del difuminado */
-    backdrop-filter: blur(1px);
-    -webkit-backdrop-filter: blur(1px); /* Para compatibilidad con Safari */
+            /* El truco del difuminado */
+            backdrop-filter: blur(1px);
+            -webkit-backdrop-filter: blur(1px);
+            /* Para compatibilidad con Safari */
 
-    position: absolute; 
-    inset: 0; 
-    z-index: 10;
-}
-        .hero-bg {
-            position: absolute; inset: 0; background-size: cover; background-position: center;
-            animation: slowZoom 40s infinite alternate; z-index: 1;
-            will-change: transform;
+            position: absolute;
+            inset: 0;
+            z-index: 10;
         }
-        @keyframes slowZoom { from { transform: scale(1); } to { transform: scale(1.15); } }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            animation: slowZoom 40s infinite alternate;
+            z-index: 1;
+            will-change: transform;
+
+            /* Añade estas líneas para el desvanecimiento */
+            -webkit-mask-image: radial-gradient(circle at top left, black 30%, transparent 100%);
+            mask-image: linear-gradient(to bottom right, black 50%, transparent 100%);
+        }
+
+        @keyframes slowZoom {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.15);
+            }
+        }
 
         /* REVEAL SYSTEM */
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); will-change: opacity, transform; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
-        
-        /* CARD SYSTEM */
-        .glass-card { background: white; border: 1px solid rgba(0,0,0,0.04); transition: all 0.4s ease; will-change: transform; }
-        .glass-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.04); }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
 
-        .audio-visualizer { display: flex; align-items: flex-end; gap: 2px; height: 18px; cursor: pointer; }
-        .bar { width: 2px; background: var(--brand-dark); border-radius: 1px; will-change: height; }
-        .playing .bar { animation: dance 0.6s infinite alternate; }
-        @keyframes dance { from { height: 2px; } to { height: 100%; } }
-        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* CARD SYSTEM */
+        .glass-card {
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            transition: all 0.4s ease;
+            will-change: transform;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+        }
+
+        .audio-visualizer {
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .bar {
+            width: 2px;
+            background: var(--brand-dark);
+            border-radius: 1px;
+            will-change: height;
+        }
+
+        .playing .bar {
+            animation: dance 0.6s infinite alternate;
+        }
+
+        @keyframes dance {
+            from {
+                height: 2px;
+            }
+
+            to {
+                height: 100%;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
 
         /* MENÚ MÓVIL */
         .mobile-menu {
-            position: fixed; top: 0; right: 0; width: 100%; height: 100vh;
-            background: rgba(0, 0, 0, 0.9); z-index: 95; display: flex;
-            flex-direction: column; justify-content: center; align-items: center;
-            gap: 2rem; transition: opacity 0.3s ease, visibility 0.3s ease;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0);
+            z-index: 95;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
         }
-        .mobile-menu.hidden { opacity: 0; visibility: hidden; }
+
+        .mobile-menu.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
         .mobile-menu a {
-            color: white; font-size: 1.5rem; font-weight: bold;
-            text-transform: uppercase; letter-spacing: 0.15em;
-            transition: color 0.3s ease; text-decoration: none;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            transition: color 0.3s ease;
+            text-decoration: none;
         }
-        .mobile-menu a:hover { color: #c5a059; }
+
+        .mobile-menu a:hover {
+            color: #c5a059;
+        }
 
         /* BOTÓN HAMBURGUESA */
         .mobile-menu-btn {
-            display: none; background: none; border: none; color: var(--brand-dark);
-            cursor: pointer; padding: 0.5rem; z-index: 40;
+            display: none;
+            background: none;
+            border: none;
+            color: var(--brand-dark);
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 40;
         }
-        .mobile-menu-btn svg { width: 1.5rem; height: 1.5rem; transition: transform 0.3s ease; }
-        .mobile-menu-btn.active svg { transform: rotate(90deg); }
+
+        .mobile-menu-btn svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu-btn.active svg {
+            transform: rotate(90deg);
+        }
 
         /* RESPONSIVE OVERRIDES */
-        @media (max-width: 1024px) { 
-            .side-nav { display: none; }
-            .whatsapp-float { bottom: 20px; right: 20px; width: 50px; height: 50px; }
-        }
-        @media (max-width: 768px) {
-            .mobile-menu-btn { display: block; }
+        @media (max-width: 1024px) {
+            .side-nav {
+                display: none;
+            }
+
+            .whatsapp-float {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+            }
         }
 
-        /* EXPERIENCE MODAL */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+
+/* EXPERIENCE MODAL */
         #experience-modal {
+            position: fixed; /* Asegura que cubra toda la pantalla */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
+            z-index: 9999; /* Por encima de todo */
+            
+            /* El truco del fondo negro y borroso */
+            background-color: rgba(0, 0, 0, 0.6); /* Negro con 60% de opacidad */
+            backdrop-filter: blur(8px); /* Nivel de desenfoque */
+            -webkit-backdrop-filter: blur(8px); /* Soporte para Safari */
         }
+
         #experience-modal.hidden {
             display: none;
         }
+        .experience-modal-body {
+        padding: 20px;
+        }
+
         .experience-modal-content {
             background: white;
             border-radius: 2rem;
@@ -139,8 +317,11 @@
             width: 90%;
             max-height: 90vh;
             overflow-y: auto;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); /* Sombra para resaltar del fondo */
             animation: slideUp 0.3s ease-out;
         }
+
+        /* Resto de tus estilos se mantienen igual... */
         .experience-modal-header {
             background: linear-gradient(135deg, var(--brand-green) 0%, #0d3321 100%);
             color: white;
@@ -150,75 +331,81 @@
             top: 0;
             z-index: 10;
         }
-        .experience-modal-body {
-            padding: 2rem;
-        }
-        .experience-incluye li {
-            list-style: none;
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
-            color: #4b5563;
-        }
     </style>
 </head>
+
 <body class="antialiased selection:bg-emerald-100">
 
     <!-- NAVEGACIÓN LATERAL (SÓLO DESKTOP) -->
     <nav class="side-nav" id="side-navigation">
         <a href="#inicio" class="nav-dot active" data-section="inicio"></a>
-        <a href="#propuesta" class="nav-dot" data-section="propuesta"></a>
-        <a href="#destinos" class="nav-dot" data-section="destinos"></a>
+        <a href="#Experiencias" class="nav-dot" data-section="Experiencias"></a>
+        <a href="#Garantias" class="nav-dot" data-section="Garantias"></a>
         <a href="#horario" class="nav-dot" data-section="horario"></a>
         <a href="#contacto" class="nav-dot" data-section="contacto"></a>
     </nav>
 
     <!-- WHATSAPP CHAT MODAL -->
     <button onclick="openWhatsAppChat()" class="whatsapp-float" aria-label="Abrir chat con Bitácora">
-        <svg class="w-7 h-7 mx-auto" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <svg class="w-7 h-7 mx-auto" fill="currentColor" viewBox="0 0 24 24">
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg>
     </button>
 
     <!-- MODAL CHAT -->
-    <div id="whatsapp-modal" class="hidden fixed inset-0 bg-black/50 z-[3000] flex items-end md:items-center justify-end md:justify-center p-4">
-        <div class="bg-white rounded-[2rem] w-full md:w-96 h-[80vh] md:h-[500px] flex flex-col shadow-2xl animate-[slideUp_0.3s_ease-out]">
-            <!-- Header -->
-            <div class="bg-gradient-to-r from-emerald-950 to-emerald-900 text-white p-6 rounded-t-[2rem] flex justify-between items-center">
+    <div id="whatsapp-modal"
+    class="hidden fixed inset-0 bg-black/70 backdrop-blur-md z-[3000] flex items-end md:items-center justify-end md:justify-center p-4">
+    <div
+        class="bg-white rounded-[2rem] w-full md:w-96 h-[80vh] md:h-[500px] flex flex-col shadow-2xl animate-[slideUp_0.3s_ease-out]">
+        <div
+            class="bg-gradient-to-r from-emerald-950 to-emerald-900 text-white p-6 rounded-t-[2rem] flex justify-between items-center">
+            <div style="display: flex; gap: 10px;">
                 <div>
-                    <h3 class="font-bold">Bitácora Colombia Travels</h3>
-                    <p class="text-xs text-emerald-200">Siempre en línea • 24/7</p>
+                <img src="img/bitacora_logo.png" alt="logo" class="w-10 h-10 mb-1">
                 </div>
-                <button onclick="closeWhatsAppChat()" class="text-white hover:bg-emerald-800 p-2 rounded-full transition">&times;</button>
-            </div>
-            
-            <!-- Messages -->
-            <div class="flex-1 overflow-y-auto p-6 space-y-4">
-                <div class="bg-gray-100 text-gray-800 p-4 rounded-lg rounded-bl-none max-w-xs text-sm">
-                    <p class="font-semibold text-emerald-900">Equipo Bitácora</p>
-                    <p class="mt-2">¡Hola! 👋 Somos el equipo de Bitácora Colombia Travels. ¿En qué podemos ayudarte hoy?</p>
-                </div>
-                <div class="bg-gray-100 text-gray-800 p-4 rounded-lg rounded-bl-none max-w-xs text-sm">
-                    <p>Cuéntanos sobre tu viaje ideal y te diseñaremos una experiencia única.</p>
+                <div>
+                <h3 class="font-bold">Bitácora Colombia Travels</h3>
+                <p class="text-xs text-emerald-200">En línea •</p>
                 </div>
             </div>
-            
-            <!-- Input -->
-            <div class="border-t border-gray-200 p-4 flex gap-2">
-                <input type="text" placeholder="Escribe tu mensaje..." class="flex-1 rounded-full px-4 py-3 bg-gray-100 text-sm focus:outline-none focus:bg-gray-200 transition" id="msg-input">
-                <button onclick="sendWhatsAppMessage()" class="bg-emerald-900 text-white p-3 rounded-full hover:bg-emerald-950 transition">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
-                </button>
+            <button onclick="closeWhatsAppChat()"
+                class="text-white hover:bg-emerald-800 p-2 rounded-full transition">&times;</button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto p-6 space-y-4">
+            <div class="bg-gray-100 text-gray-800 p-4 rounded-lg rounded-bl-none max-w-xs text-sm">
+                <p class="font-semibold text-emerald-900">Equipo Bitácora</p>
+                <p class="mt-2">¡Hola! 👋 Somos el equipo de Bitácora Colombia Travels. ¿En qué podemos ayudarte
+                    hoy?</p>
             </div>
         </div>
+
+        <div class="border-t border-gray-200 p-4 flex gap-2">
+            <input type="text" placeholder="Escribe tu mensaje..."
+                class="flex-1 rounded-full px-4 py-3 bg-gray-100 text-sm focus:outline-none focus:bg-gray-200 transition"
+                id="msg-input">
+            <button onclick="sendWhatsAppMessage()"
+                class="bg-emerald-900 text-white p-3 rounded-full hover:bg-emerald-950 transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                </svg>
+            </button>
+        </div>
     </div>
+</div>
 
     <!-- EXPERIENCE DETAIL MODAL -->
     <div id="experience-modal" class="hidden fixed inset-0 bg-black/50 z-[3000] p-4">
         <div class="experience-modal-content">
             <div class="experience-modal-header">
-                <button onclick="closeExperienceModal()" class="float-right text-white hover:bg-white/20 p-2 rounded-full transition mb-4">&times;</button>
+                <button onclick="closeExperienceModal()"
+                    class="float-right text-white hover:bg-white/20 p-2 rounded-full transition mb-4">&times;</button>
                 <p class="text-xs uppercase tracking-wider opacity-90" id="experience-tag">Santa Marta</p>
                 <h2 class="text-3xl md:text-4xl playfair font-bold mt-2" id="experience-titulo">Sierra Nevada</h2>
             </div>
-            
+
             <div class="experience-modal-body">
                 <!-- Imagen -->
                 <div class="mb-6 rounded-xl overflow-hidden h-64">
@@ -228,28 +415,25 @@
                 <!-- Descripción -->
                 <div class="mb-8">
                     <h3 class="font-bold text-emerald-900 mb-3">Sobre esta Experiencia</h3>
-                    <p id="experience-descripcion" class="text-gray-600 text-sm leading-relaxed">A vivid description of the experience.</p>
+                    <p id="experience-descripcion" class="text-gray-600 text-sm leading-relaxed">A vivid description of
+                        the experience.</p>
                 </div>
 
-                <!-- Duración -->
-                <div class="mb-8">
-                    <div class="bg-emerald-50 p-4 rounded-xl inline-block">
-                        <p class="text-xs uppercase text-gray-500 font-bold tracking-wider">Duración</p>
-                        <p id="experience-duracion" class="text-lg font-bold text-emerald-900 mt-1">5-6 días</p>
-                    </div>
-                </div>
 
                 <!-- Qué Incluye -->
                 <div class="mb-8">
                     <h3 class="font-bold text-emerald-900 mb-4">Qué Incluye</h3>
                     <ul id="experience-incluye" class="experience-incluye space-y-2">
-                        <li class="flex items-start gap-3"><span class="text-amber-600 mt-1">✓</span><span>Transporte aéreo incluido</span></li>
-                        <li class="flex items-start gap-3"><span class="text-amber-600 mt-1">✓</span><span>Campamentos boutique</span></li>
+                        <li class="flex items-start gap-3"><span class="text-amber-600 mt-1">✓</span><span>Transporte
+                                aéreo incluido</span></li>
+                        <li class="flex items-start gap-3"><span class="text-amber-600 mt-1">✓</span><span>Campamentos
+                                boutique</span></li>
                     </ul>
                 </div>
 
                 <!-- Botón Reservar -->
-                <button id="reservar-experiencia-btn" class="w-full bg-gradient-to-r from-emerald-900 to-emerald-800 text-white font-bold py-4 rounded-full hover:from-emerald-950 hover:to-emerald-900 transition-all mb-4">
+                <button id="reservar-experiencia-btn"
+                    class="w-full bg-gradient-to-r from-emerald-900 to-emerald-800 text-white font-bold py-4 rounded-full hover:from-emerald-950 hover:to-emerald-900 transition-all mb-4">
                     Reservar Ahora
                 </button>
                 <p class="text-xs text-center text-gray-400">Serás redirigido a WhatsApp para confirmar tu reserva</p>
@@ -263,30 +447,42 @@
 
     <div id="app-container">
         <!-- BARRA DE NAVEGACIÓN -->
-        <nav class="fixed top-0 w-full z-[100] transition-all duration-500 py-6 md:py-8 lg:py-10 px-6 md:px-12 lg:px-20 flex justify-between items-center text-black" id="main-nav">
+        <nav class="fixed top-0 w-full z-[100] transition-all duration-500 py-6 md:py-8 lg:py-10 px-6 md:px-12 lg:px-20 flex justify-between items-center text-black"
+            id="main-nav">
             <div class="flex items-center gap-4 lg:gap-6">
-                <span class="playfair text-3xl lg:text-4xl font-bold italic tracking-tighter">B.</span>
+                <img src="img/bitacora_logo.png" alt="Bitácora Logo" class="w-8 h-8 lg:w-10 lg:h-10">
                 <div class="h-6 w-[1px] bg-black/10 hidden md:block"></div>
-                <span class="text-[9px] lg:text-[10px] font-bold tracking-[0.6em] uppercase hidden sm:block">Bitácora Colombia Travels</span>
+                <span
+                    class="text-gray-400 text-[9px] lg:text-[10px] font-bold tracking-[0.6em] uppercase hidden sm:block">
+                    Bitácora Colombia Travels
+                </span>
             </div>
-            
-            <div class="hidden lg:flex gap-12 text-[10px] font-bold uppercase tracking-[0.4em]">
-                <a href="#inicio" class="hover:text-amber-800 transition-colors">Inicio</a>
-                <a href="#destinos" class="hover:text-amber-800 transition-colors">Destinos</a>
-                <a href="#horario" class="hover:text-amber-800 transition-colors">Horario</a>
-                <a href="#contacto" class="hover:text-amber-800 transition-colors">Contacto</a>
+
+            <div class="hidden lg:flex gap-12 text-[10px] font-bold uppercase tracking-[0.4em] text-gray-400">
+                <a href="#inicio" class="hover:text-[#006CF5] transition-colors">Inicio</a>
+                <a href="#Experiencias" class="hover:text-[#006CF5] transition-colors">Experiencias</a>
+                <a href="#Garantias" class="hover:text-[#006CF5] transition-colors">Garantias</a>
+                <a href="#horario" class="hover:text-[#006CF5] transition-colors">Horario</a>
+                <a href="#contacto" class="hover:text-[#006CF5] transition-colors">Contacto</a>
             </div>
 
             <div class="flex items-center gap-4">
-                <div onclick="toggleAudio()" id="visualizer" class="audio-visualizer group">
-                    <span class="text-[8px] uppercase tracking-widest mr-3 opacity-0 group-hover:opacity-40 transition-opacity hidden sm:block">Atmósfera</span>
-                    <div class="bar h-2"></div>
-                    <div class="bar h-4"></div>
-                    <div class="bar h-3"></div>
+                <div onclick="toggleAudio()" id="visualizer" class="audio-visualizer group cursor-pointer">
+                    <span
+                        class="text-gray-400 text-[8px] uppercase tracking-widest mr-3 opacity-0 group-hover:opacity-100 transition-opacity hidden sm:block">
+                        Audio
+                    </span>
+                    <div class="bar h-2 bg-gray-400"></div>
+                    <div class="bar h-4 bg-gray-400"></div>
+                    <div class="bar h-3 bg-gray-400"></div>
                 </div>
-                <button onclick="toggleMobileMenu()" class="mobile-menu-btn" aria-label="Menú de navegación">
-                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+
+                <button onclick="toggleMobileMenu()"
+                    class="mobile-menu-btn text-gray-400 hover:text-white transition-colors"
+                    aria-label="Menú de navegación">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                 </button>
             </div>
@@ -295,196 +491,306 @@
         <!-- MENÚ MÓVIL -->
         <nav id="mobile-menu" class="mobile-menu hidden">
             <a href="#inicio" onclick="closeMobileMenu()">Inicio</a>
-            <a href="#propuesta" onclick="closeMobileMenu()">Garantias</a>
-            <a href="#destinos" onclick="closeMobileMenu()">Experiencias</a>
+            <a href="#Experiencias" onclick="closeMobileMenu()">Experiencias</a>
+            <a href="#Garantias" onclick="closeMobileMenu()">Garantias</a>
             <a href="#horario" onclick="closeMobileMenu()">Horario</a>
             <a href="#contacto" onclick="closeMobileMenu()">Contacto</a>
         </nav>
 
         <!-- HERO SECTION -->
-        <header id="inicio" class="relative h-[90vh] md:h-screen w-full flex items-center overflow-hidden bg-white">
-            <div class="hero-bg" style="background-image: url('https://static.caribbeannewsdigital.com/cdn/ff/UiBfx66WfaSsUspcWRU6YNaiFEagMS5ge2Q5-2otoGA/1707784564/public/2020-04/colombia-cannabis-company-1280x800.jpg');"></div>
+        <header id="inicio" class="relative h-[100vh] md:h-screen w-full flex items-center overflow-hidden bg-white">
+            <div class="hero-bg"
+                style="background-image: url('https://static.caribbeannewsdigital.com/cdn/ff/UiBfx66WfaSsUspcWRU6YNaiFEagMS5ge2Q5-2otoGA/1707784564/public/2020-04/colombia-cannabis-company-1280x800.jpg'); height: 100vh;">
+            </div>
             <div class="hero-overlay"></div>
             <div class="relative z-20 px-6 md:px-12 lg:px-24 w-full max-w-[1600px] mx-auto">
                 <div class="mb-6 md:mb-8 overflow-hidden">
-                    <p class="text-emerald-900 font-medium text-[10px] md:text-[12px] uppercase tracking-[0.6em] md:tracking-[1em] translate-y-full animate-[slideUp_1s_ease-out_forwards]">Bienvenido a Bitácora Colombia Travels</p>
+                    <p
+                        class="text-white font-medium text-[10px] md:text-[12px] uppercase tracking-[0.6em] md:tracking-[1em] translate-y-full animate-[slideUp_1s_ease-out_forwards]">
+                        Bienvenido a Bitácora Colombia Travels</p>
                 </div>
-                <h1 class="text-black text-5xl md:text-7xl lg:text-8xl xl:text-[8.5rem] playfair font-bold mb-10 md:mb-12 leading-[1.1] md:leading-[0.85] tracking-tight">
+                <h1
+                    class="text-white text-5xl md:text-7xl lg:text-8xl xl:text-[8.5rem] playfair font-bold mb-10 md:mb-12 leading-[1.1] md:leading-[0.85] tracking-tight">
                     Descubre el arte <br class="hidden md:block"><span class="italic font-normal">explorar.</span>
                 </h1>
                 <div class="flex flex-col sm:flex-row gap-6 md:gap-8 items-start sm:items-center">
-                    <a href="#destinos" class="w-full sm:w-auto text-center group px-10 md:px-16 py-5 md:py-7 bg-black text-white text-[10px] md:text-[11px] font-bold uppercase tracking-[0.3em] rounded-full hover:bg-emerald-950 transition-all flex items-center justify-center gap-4">
+                    <a href="#Experiencias"
+                        class="w-full sm:w-auto text-center group px-10 md:px-16 py-5 md:py-7 bg-[#006CF5] text-white text-[10px] md:text-[11px] font-bold uppercase tracking-[0.3em] rounded-full hover:bg-[#004bb1] transition-all flex items-center justify-center gap-4 shadow-lg shadow-blue-500/20">
                         Descubrir
-                        <div class="w-1.5 h-1.5 bg-white rounded-full group-hover:scale-[2.5] transition-transform"></div>
+                        <div class="w-1.5 h-1.5 bg-white rounded-full group-hover:scale-[2.5] transition-transform">
+                        </div>
                     </a>
                 </div>
+                </a>
             </div>
-        </header>
+    </div>
+    </header>
 
-        <!-- PROMESA DE VALOR -->
-        <section id="propuesta" class="py-24 md:py-40 bg-gradient-to-b from-white to-gray-50">
-            <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
-                <div class="text-center mb-16 md:mb-24 reveal">
-                    <span class="text-amber-600 text-[10px] font-bold uppercase tracking-[0.5em] mb-6 block">Garantías Bitácora</span>
-                    <h2 class="text-4xl md:text-6xl lg:text-7xl playfair font-bold mb-8 leading-tight">Tu viaje, <span class="italic font-normal">en manos seguras.</span></h2>
-                    <p class="text-gray-500 text-base md:text-lg font-light leading-relaxed max-w-3xl mx-auto">
-                        Cada detalle está diseñado con la rigurosidad y profesionalismo que merecen nuestros viajeros. Seguridad, confianza y autenticidad en cada paso del camino.
+
+
+    <!-- Experiencias GRID -->
+    <section id="Experiencias" class="py-24 md:py-40 px-6 md:px-12 lg:px-20 bg-[#fafafa]">
+        <div class="max-w-[1400px] mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-24 reveal">
+                <div class="max-w-xl">
+                    <h2 class="text-5xl md:text-6xl playfair font-bold mb-6">Experiencias</h2>
+                    <p class="text-gray-400 font-light text-sm md:text-base">Tu próxima gran historia comienza aquí. Explora el equilibrio perfecto entre tierra y cultura.</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12" id="grid-Experiencias">
+                <!-- Dinámico vía JS -->
+            </div>
+        </div>
+    </section>
+
+    <section id="Garantias" class="py-24 md:py-40 bg-gradient-to-b from-white to-gray-50">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
+        <div class="text-center mb-16 md:mb-24 reveal">
+            <h2 class="text-4xl md:text-6xl lg:text-7xl playfair font-bold mb-8 leading-tight">
+                Garantías <span class="italic font-normal">y seguridad.</span>
+            </h2>
+        </div>
+
+        <div class="max-w-5xl mx-auto grid grid-cols-2 gap-4 md:gap-8 reveal">
+
+            <div class="bg-white border border-gray-100 p-6 md:p-10 rounded-[2rem] hover:shadow-xl hover:border-[#006CF5]/30 transition-all duration-500 group flex flex-col items-center text-center">
+                <div class="mb-5 inline-flex w-12 h-12 items-center justify-center bg-blue-50 rounded-full group-hover:bg-[#006CF5] transition-colors duration-500">
+                    <svg class="w-6 h-6 text-[#006CF5] group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-lg md:text-xl playfair font-bold text-slate-900 mb-2">Pagos Seguros</h3>
+                <p class="text-gray-500 text-[11px] md:text-sm font-light leading-relaxed">Transacciones y múltiples métodos de pago para tu tranquilidad.</p>
+            </div>
+
+            <div class="bg-white border border-gray-100 p-6 md:p-10 rounded-[2rem] hover:shadow-xl hover:border-[#006CF5]/30 transition-all duration-500 group flex flex-col items-center text-center">
+                <div class="mb-5 inline-flex w-12 h-12 items-center justify-center bg-blue-50 rounded-full group-hover:bg-[#006CF5] transition-colors duration-500">
+                    <svg class="w-6 h-6 text-[#006CF5] group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-lg md:text-xl playfair font-bold text-slate-900 mb-2">Operador Certificado</h3>
+                <p class="text-gray-500 text-[11px] md:text-sm font-light leading-relaxed">Cumplimos con los más altos estándares de calidad turística nacional.</p>
+            </div>
+
+            <div class="bg-white border border-gray-100 p-6 md:p-10 rounded-[2rem] hover:shadow-xl hover:border-[#006CF5]/30 transition-all duration-500 group flex flex-col items-center text-center">
+                <div class="mb-5 inline-flex w-12 h-12 items-center justify-center bg-blue-50 rounded-full group-hover:bg-[#006CF5] transition-colors duration-500">
+                    <svg class="w-6 h-6 text-[#006CF5] group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-lg md:text-xl playfair font-bold text-slate-900 mb-2">Registro RNT</h3>
+                <p class="text-gray-500 text-[11px] md:text-sm font-light leading-relaxed">RNT 217212: Registro Nacional de Turismo legalmente constituido.</p>
+            </div>
+
+            <div class="bg-white border border-gray-100 p-6 md:p-10 rounded-[2rem] hover:shadow-xl hover:border-[#006CF5]/30 transition-all duration-500 group flex flex-col items-center text-center">
+                <div class="mb-5 inline-flex w-12 h-12 items-center justify-center bg-blue-50 rounded-full group-hover:bg-[#006CF5] transition-colors duration-500">
+                    <svg class="w-6 h-6 text-[#006CF5] group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-lg md:text-xl playfair font-bold text-slate-900 mb-2">Seguro de Viaje</h3>
+                <p class="text-gray-500 text-[11px] md:text-sm font-light leading-relaxed">Asistencia médica y pólizas de protección durante todas nuestras rutas.</p>
+            </div>
+
+            <div class="bg-white border border-gray-100 p-6 md:p-10 rounded-[2rem] hover:shadow-xl hover:border-[#006CF5]/30 transition-all duration-500 group flex flex-col items-center text-center">
+                <div class="mb-5 inline-flex w-12 h-12 items-center justify-center bg-blue-50 rounded-full group-hover:bg-[#006CF5] transition-colors duration-500">
+                    <svg class="w-6 h-6 text-[#006CF5] group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-lg md:text-xl playfair font-bold text-slate-900 mb-2">Guías Expertos</h3>
+                <p class="text-gray-500 text-[11px] md:text-sm font-light leading-relaxed">Personal nativo y profesional apasionado por contar la historia de su tierra.</p>
+            </div>
+
+            <div class="bg-white border border-gray-100 p-6 md:p-10 rounded-[2rem] hover:shadow-xl hover:border-[#006CF5]/30 transition-all duration-500 group flex flex-col items-center text-center">
+                <div class="mb-5 inline-flex w-12 h-12 items-center justify-center bg-blue-50 rounded-full group-hover:bg-[#006CF5] transition-colors duration-500">
+                    <svg class="w-6 h-6 text-[#006CF5] group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-lg md:text-xl playfair font-bold text-slate-900 mb-2">Cancelación Fácil</h3>
+                <p class="text-gray-500 text-[11px] md:text-sm font-light leading-relaxed">Entendemos los imprevistos; políticas claras para cambios o reembolsos.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+    <section id="horario" class="py-24 md:py-40 bg-white px-6 md:px-12 lg:px-20">
+        <div class="max-w-[1400px] mx-auto">
+            <div class="text-center mb-16 md:mb-24 reveal">
+                <h2 class="text-4xl md:text-6xl playfair font-bold mb-8 italic">Horario 24/7</h2>
+            </div>
+
+            <div class="max-w-4xl mx-auto reveal">
+                <div
+                    class="relative overflow-hidden bg-slate-50 border border-slate-100 p-12 md:p-20 rounded-[3rem] text-center transition-all duration-500">
+
+                    <div class="absolute top-0 right-0 p-8 opacity-10">
+                        <svg class="w-32 h-32 text-[#006CF5]" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 2a8 8 0 100 16 8 8 0 000-16zm1 8h4v2h-6V7h2v5z" />
+                        </svg>
+                    </div>
+
+                    <div
+                        class="relative z-10 mb-10 inline-flex w-20 h-20 items-center justify-center bg-white rounded-2xl shadow-sm border border-slate-100">
+                        <span class="relative flex h-3 w-3 mr-[-6px] mt-[-20px]">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-3 w-3 bg-[#006CF5]"></span>
+                        </span>
+                        <svg class="w-10 h-10 text-[#006CF5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
+                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+
+                    <h3 class="relative z-10 text-3xl md:text-4xl playfair font-bold text-slate-900 mb-6">Soporte
+                        Operativo</h3>
+
+                    <p
+                        class="relative z-10 text-gray-500 text-sm md:text-base font-light mb-12 max-w-md mx-auto leading-relaxed">
+                        Asistencia directa y gestión de incidencias en tiempo real a través de nuestros canales
+                        oficiales.
                     </p>
-                </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 reveal">
-                    <!-- Pagos Seguros -->
-                    <div class="bg-white border border-gray-100 p-8 md:p-10 rounded-[2rem] hover:shadow-lg hover:border-amber-200 transition-all duration-300">
-                        <div class="mb-6 inline-flex w-12 h-12 items-center justify-center bg-emerald-100 rounded-full">
-                            <svg class="w-6 h-6 text-emerald-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                        </div>
-                        <h3 class="text-xl md:text-2xl playfair font-bold text-emerald-900 mb-3">Pagos Seguros</h3>
-                        <p class="text-gray-500 text-sm md:text-base font-light leading-relaxed">Plataformas certificadas y encriptadas. Tus transacciones están protegidas con los más altos estándares internacionales.</p>
-                    </div>
-
-                    <!-- RNT Certificado -->
-                    <div class="bg-white border border-gray-100 p-8 md:p-10 rounded-[2rem] hover:shadow-lg hover:border-amber-200 transition-all duration-300">
-                        <div class="mb-6 inline-flex w-12 h-12 items-center justify-center bg-emerald-100 rounded-full">
-                            <svg class="w-6 h-6 text-emerald-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        </div>
-                        <h3 class="text-xl md:text-2xl playfair font-bold text-emerald-900 mb-3">Operador Certificado</h3>
-                        <p class="text-gray-500 text-sm md:text-base font-light leading-relaxed">RNT: <strong>217212</strong>. Registro oficial ante el Ministerio de Comercio. Cumplimos con todos los estándares legales y de calidad.</p>
-                    </div>
-
-                    <!-- Aventura Segura -->
-                    <div class="bg-white border border-gray-100 p-8 md:p-10 rounded-[2rem] hover:shadow-lg hover:border-amber-200 transition-all duration-300">
-                        <div class="mb-6 inline-flex w-12 h-12 items-center justify-center bg-emerald-100 rounded-full">
-                            <svg class="w-6 h-6 text-emerald-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                        </div>
-                        <h3 class="text-xl md:text-2xl playfair font-bold text-emerald-900 mb-3">Aventura Segura</h3>
-                        <p class="text-gray-500 text-sm md:text-base font-light leading-relaxed">Equipos de seguridad actualizados, protocolos de emergencia y seguros integrales en todas nuestras actividades.</p>
-                    </div>
-
-                    <!-- Guías Especializados -->
-                    <div class="bg-white border border-gray-100 p-8 md:p-10 rounded-[2rem] hover:shadow-lg hover:border-amber-200 transition-all duration-300">
-                        <div class="mb-6 inline-flex w-12 h-12 items-center justify-center bg-emerald-100 rounded-full">
-                            <svg class="w-6 h-6 text-emerald-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>
-                        </div>
-                        <h3 class="text-xl md:text-2xl playfair font-bold text-emerald-900 mb-3">Guías Personalizados</h3>
-                        <p class="text-gray-500 text-sm md:text-base font-light leading-relaxed">Expertos locales certificados que hablan tu idioma. Conocimiento profundo de cada territorio y conexión auténtica.</p>
-                    </div>
-
-                    <!-- Itinerarios Flexibles -->
-                    <div class="bg-white border border-gray-100 p-8 md:p-10 rounded-[2rem] hover:shadow-lg hover:border-amber-200 transition-all duration-300">
-                        <div class="mb-6 inline-flex w-12 h-12 items-center justify-center bg-emerald-100 rounded-full">
-                            <svg class="w-6 h-6 text-emerald-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        </div>
-                        <h3 class="text-xl md:text-2xl playfair font-bold text-emerald-900 mb-3">Flexibilidad Total</h3>
-                        <p class="text-gray-500 text-sm md:text-base font-light leading-relaxed">Ajustamos tu itinerario según tus necesidades. Cambios, cancelaciones y personalizaciones sin complicaciones.</p>
-                    </div>
-
-
-                </div>
-            </div>
-        </section>
-
-        <!-- DESTINOS GRID -->
-        <section id="destinos" class="py-24 md:py-40 px-6 md:px-12 lg:px-20 bg-[#fafafa]">
-            <div class="max-w-[1400px] mx-auto">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-24 reveal">
-                    <div class="max-w-xl">
-                        <h2 class="text-5xl md:text-6xl playfair font-bold mb-6">Experiencias</h2>
-                        <p class="text-gray-400 font-light text-sm md:text-base">Una selección rigurosa de coordenadas donde la naturaleza y la cultura convergen en perfecta armonía.</p>
-                    </div>
-                    <a href="#" class="mt-8 md:mt-0 text-[10px] font-bold uppercase tracking-[0.3em] border-b border-black/10 pb-2 hover:border-black transition-all">Explorar Catálogo</a>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12" id="grid-destinos">
-                    <!-- Dinámico vía JS -->
-                </div>
-            </div>
-        </section>
-
-        <!-- HORARIOS -->
-        <section id="horario" class="py-24 md:py-40 bg-white px-6 md:px-12 lg:px-20">
-            <div class="max-w-[1400px] mx-auto">
-                <div class="text-center mb-16 md:mb-24 reveal">
-                    <span class="text-amber-600 text-[10px] font-bold uppercase tracking-[0.5em] mb-4 block">Disponibilidad</span>
-                    <h2 class="text-4xl md:text-5xl playfair font-bold mb-8">Horarios</h2>
-                    <p class="text-gray-500 text-base md:text-lg font-light leading-relaxed max-w-2xl mx-auto">Nuestro equipo está disponible todos los días del año. No importa la hora, estaremos aquí para ti.</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-1 gap-12 md:gap-16 max-w-2xl mx-auto reveal">
-                    <!-- Servicio al Viajero -->
-                    <div class="bg-gradient-to-br from-emerald-50 to-transparent border border-emerald-100 p-10 md:p-12 rounded-[2rem] text-center hover:shadow-lg transition-all duration-300">
-                        <div class="mb-8 inline-flex w-16 h-16 items-center justify-center bg-emerald-100 rounded-full">
-                            <svg class="w-8 h-8 text-emerald-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        </div>
-                        <h3 class="text-2xl md:text-3xl playfair font-bold text-emerald-900 mb-4">Servicio al Viajero</h3>
-                        <p class="text-gray-600 text-sm md:text-base font-light mb-6 leading-relaxed">
-                            Chat, llamadas y email disponible en todo momento para resolver tus consultas.
-                        </p>
-                        <div class="space-y-3">
-                            <div class="text-3xl playfair font-bold text-emerald-900">24 HORAS</div>
-                            <div class="text-[10px] uppercase tracking-[0.3em] text-gray-400 font-bold">Todos los días</div>
-                            <div class="text-[10px] uppercase tracking-[0.3em] text-gray-400 font-bold">365 días al año</div>
-                        </div>
-                    </div>
-
-
-
-
-        </section>
-
-        <!-- CONTACTO -->
-        <section id="contacto" class="py-24 md:py-40 bg-[#0f1715] text-white px-6 md:px-12 lg:px-20 overflow-hidden">
-            <div class="max-w-[1400px] mx-auto">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-32">
-                    <div class="reveal">
-                        <h2 class="text-5xl md:text-7xl lg:text-8xl playfair font-bold mb-12 leading-tight">Contactanos</h2>
-                        <div class="space-y-10 md:space-y-12">
-                            <div>
-                                <p class="text-[9px] uppercase tracking-[0.4em] text-white/30 mb-3">Consultoría Privada</p>
-                                <a href="mailto:bitacorcol.info@gmail.com" class="text-xl md:text-3xl font-light hover:text-amber-500 transition-colors break-words">bitacorcol.info@gmail.com</a>
+                    <div class="relative z-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-white/60 backdrop-blur-sm p-6 rounded-2xl border border-white">
+                            <div class="text-4xl md:text-5xl playfair font-bold text-[#006CF5] mb-2">24/7</div>
+                            <div class="text-[9px] uppercase tracking-[0.4em] text-slate-400 font-bold">Cobertura Total
                             </div>
-                            <div>
-                                <p class="text-[9px] uppercase tracking-[0.4em] text-white/30 mb-3">Llamada Directa</p>
-                                <p class="text-2xl md:text-3xl font-light">+57 316 384 1019</p>
+                        </div>
+                        <div class="bg-white/60 backdrop-blur-sm p-6 rounded-2xl border border-white">
+                            <div class="text-4xl md:text-5xl playfair font-bold text-slate-900 mb-2">365</div>
+                            <div class="text-[9px] uppercase tracking-[0.4em] text-slate-400 font-bold">Días al Año
                             </div>
                         </div>
                     </div>
-                    <div class="bg-white/5 p-8 md:p-16 rounded-[2.5rem] md:rounded-[4rem] backdrop-blur-sm reveal">
-                        <h4 class="text-[10px] font-bold uppercase tracking-[0.5em] mb-10 text-amber-500">Colombia Headquarters</h4>
-                        <div id="ui-horarios" class="space-y-8 mb-12 md:mb-16"></div>
-                        <div>
-                            <p class="text-white/30 text-[9px] uppercase tracking-[0.4em] mb-4">Ubicación</p>
-                            <p class="text-lg md:text-xl font-light leading-relaxed">Centro Uno Piso 2, oficina 225<br>Cartagena, Colombia</p>
-                        </div>
+
+                    <div class="mt-12">
+                        <a href="#contacto"
+                            class="text-[10px] uppercase tracking-[0.5em] font-bold text-[#006CF5] hover:text-slate-900 transition-colors">
+                            Ver canales de contacto
+                        </a>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <footer class="py-12 md:py-20 bg-[#0f1715] text-center border-t border-white/5">
-            <div class="max-w-[1400px] mx-auto px-6 md:px-12">
-                <!-- Redes Sociales -->
-                <div class="flex justify-center gap-8 mb-12">
-                    <a href="https://instagram.com/bitacora_colombia" target="_blank" class="text-white/40 hover:text-amber-500 transition-colors" title="Instagram">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.204-.012 3.584-.07 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.849.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM12 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.322a1.44 1.44 0 11.528-2.796 1.44 1.44 0 01-.528 2.796z"/></svg>
-                    </a>
-                    <a href="https://www.tiktok.com/@bitacora_travels" target="_blank" class="text-white/40 hover:text-amber-500 transition-colors" title="TikTok">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.66 1.94 2.89 2.89 0 0 1 5.66-1.94v-3.46a8.38 8.38 0 0 0-5.66 2.23v5.39A6.75 6.75 0 1 0 19.59 6.69Z"/></svg>
-                    </a>
+    <!-- CONTACTO -->
+<section id="contacto" class="py-24 md:py-40 bg-[#0f1715] text-white px-6 md:px-12 lg:px-20 overflow-hidden relative">
+    <div class="absolute top-0 right-0 w-96 h-96 bg-amber-500/5 rounded-full blur-[120px] -z-10"></div>
+    
+    <div class="max-w-[1400px] mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 items-center">
+
+            
+            
+            <div class="reveal">
+                
+                <span class="text-amber-500 text-[10px] font-bold uppercase tracking-[0.5em] mb-6 block">Hablemos</span>
+                <h2 class="text-6xl md:text-7xl lg:text-8xl playfair font-bold mb-12 leading-tight tracking-tight">
+                    Contáctanos<span class="text-amber-500">.</span>
+                </h2>
+                
+                <div class="space-y-12">
+                    <div class="group">
+                        <p class="text-[10px] uppercase tracking-[0.4em] text-white/40 mb-4 group-hover:text-amber-500 transition-colors">Correo Electrónico</p>
+                        <a href="mailto:bitacorcol.info@gmail.com"
+                           class="text-2xl md:text-4xl font-light hover:text-amber-500 transition-all duration-300 break-words border-b border-white/10 pb-2 inline-block">
+                            bitacorcol.info@gmail.com
+                        </a>
+                    </div>
+
+                    <div class="group">
+                        <p class="text-[10px] uppercase tracking-[0.4em] text-white/40 mb-4 group-hover:text-amber-500 transition-colors">Teléfono</p>
+                        <a href="https://wa.me/573163841019" target="_blank" class="text-2xl md:text-4xl font-light hover:text-amber-500 transition-all">
+                            +57 316 384 1019
+                        </a>
+                    </div>
                 </div>
-                <p class="text-[9px] text-white/20 uppercase tracking-[0.6em] px-6">Bitácora Colombia Travels &copy; 2024 | RNT 45291</p>
             </div>
-        </footer>
+
+            <div class="relative">
+                <div class="bg-white/[0.03] border border-white/10 p-10 md:p-16 rounded-[3rem] backdrop-blur-md reveal shadow-2xl">
+                    <h4 class="text-[11px] font-bold uppercase tracking-[0.6em] mb-12 text-amber-500/80">
+                        Bitácora Colombia Travels
+                    </h4>
+                    
+                    <div id="ui-horarios" class="space-y-6  opacity-90">
+                        </div>
+
+                    <div class="pt-8 border-t border-white/5">
+                        <p class="text-white/40 text-[10px] uppercase tracking-[0.4em] mb-6">Ubicación</p>
+                        <address class="not-italic">
+                            <p class="text-xl md:text-2xl font-light leading-relaxed text-white/90">
+                                Centro Uno Piso 2, oficina 225<br>
+                                <span class="text-amber-500/90 font-medium">Cartagena, Colombia</span>
+                            </p>
+                        </address>
+                        
+                        <a href="https://maps.app.goo.gl/HHHCrgtMChRA9Ham7" class="inline-block mt-8 text-[11px] uppercase tracking-widest border-b border-amber-500 text-amber-500 pb-1 hover:text-white hover:border-white transition-all">
+                            Ver en el mapa
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="absolute -bottom-6 -right-6 w-full h-full border border-white/5 rounded-[3rem] -z-10"></div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<footer class="py-12 bg-[#0f1715] border-t border-white/[0.03]">
+    <div class="max-w-screen-xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+            
+            <div class="text-center md:text-left order-2 md:order-1">
+                <h3 class="text-white/60 text-[10px] uppercase tracking-[0.4em] mb-2 font-medium">
+                    Bitácora Colombia Travels
+                </h3>
+                <p class="text-white/20 text-[9px] uppercase tracking-[0.2em]">
+                    &copy; 2026 <span class="mx-2 text-white/5">|</span> RNT 217212 <span class="mx-2 text-white/5">|</span> Cartagena, CO
+                </p>
+            </div>
+
+            <div class="flex items-center gap-6 order-1 md:order-2">
+                
+                <a href="https://instagram.com/bitacora_colombia" target="_blank" 
+                   class="text-white/30 hover:text-amber-500 transition-all duration-300 transform hover:-translate-y-1" 
+                   aria-label="Instagram">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.204-.012 3.584-.07 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.849.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM12 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.322a1.44 1.44 0 11.528-2.796 1.44 1.44 0 01-.528 2.796z"/>
+                    </svg>
+                </a>
+                
+                <a href="https://www.tiktok.com/@bitacora_travels" target="_blank" 
+                   class="text-white/30 hover:text-amber-500 transition-all duration-300 transform hover:-translate-y-1" 
+                   aria-label="TikTok">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 448 512">
+                        <path d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25V349.38A162.55 162.55 0 1 1 185 188.31V278.2a74.62 74.62 0 1 0 52.23 71.18V0l88 0a121.18 121.18 0 0 0 1.86 22.17h.03a122.18 122.18 0 0 0 108.48 104.41v83.33z"/>
+                    </svg>
+                </a>
+
+            </div>
+        </div>
+    </div>
+</footer>
     </div>
 
     <script>
         const SITE_DATA = {
-            destinos: [
+            Experiencias: [
                 {
                     id: "amazonía",
                     nombre: "Amazonía Sagrada",
                     tag: "Amazonas",
                     img: "https://images.unsplash.com/photo-1596401057633-531035ef2300?auto=format&fit=crop&q=80&w=800",
                     descripcion: "Sumérgete en el corazón del pulmón verde del planeta. Una experiencia inmersiva en la biodiversidad más pura, con guías indígenas que revelan los secretos ancestrales de la selva.",
-                    duracion: "7 a 10 días",
                     incluye: ["Transporte de lujo", "Hospedaje boutique en la selva", "Guía experto en fauna y flora", "Comidas incluidas", "Actividades de inmersión cultural"]
                 },
                 {
@@ -493,7 +799,6 @@
                     tag: "Cundinamarca",
                     img: "https://images.unsplash.com/photo-1589909202802-8f4aadce1849?auto=format&fit=crop&q=80&w=800",
                     descripcion: "Desciende a las minas de sal más profundas de América Latina. Una aventura subterránea que combina historia, geología y la belleza de cristales milenarios.",
-                    duracion: "3 a 4 días",
                     incluye: ["Transporte privado", "Hotel 5 estrellas", "Recorridos guiados en minas", "Spa de sal", "Gastronomía regional"]
                 },
                 {
@@ -502,28 +807,27 @@
                     tag: "Santa Marta",
                     img: "https://images.unsplash.com/photo-1548810901-7009477e8131?auto=format&fit=crop&q=80&w=800",
                     descripcion: "Asciende a la Ciudad Perdida a través de senderos ancestrales. Conecta con la espiritualidad de la antigua civilización Tayrona mientras disfrutas de vistas montañosas incomparables.",
-                    duracion: "5 a 6 días",
                     incluye: ["Transporte aéreo incluido", "Campamentos boutique", "Guías arqueológicos especializados", "Comidas gourmet", "Equipo de senderismo de lujo"]
                 }
             ],
-            horarios: [ 
-                { label: "Disponibilidad", value: "24/7 | 365 días al año" }, 
-                { label: "Respuesta Inmediata", value: "Siempre activo para ti" } 
+            horarios: [
+                { label: "Disponibilidad", value: "24/7 | 365 días al año" },
+                { label: "Respuesta Inmediata", value: "Siempre activo para ti" }
             ]
         };
 
         const audio = document.getElementById('main-audio');
         let playing = false;
 
-        window.onload = function() {
+        window.onload = function () {
             renderContent();
             initScrollLogic();
             initAnimations();
         };
 
         function renderContent() {
-            const grid = document.getElementById('grid-destinos');
-            SITE_DATA.destinos.forEach(d => {
+            const grid = document.getElementById('grid-Experiencias');
+            SITE_DATA.Experiencias.forEach(d => {
                 grid.innerHTML += `
                     <div class="reveal group cursor-pointer" onclick="openExperienceModal('${d.id}')">
                         <div class="relative aspect-[4/5] sm:aspect-[3/4] overflow-hidden rounded-[2rem] md:rounded-[3rem] mb-6 shadow-sm hover:shadow-lg transition-shadow">
@@ -573,7 +877,7 @@
 
         function initAnimations() {
             const observer = new IntersectionObserver((entries) => {
-                entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
+                entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
             }, { threshold: 0.05 });
             document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
         }
@@ -610,22 +914,21 @@
         }
 
         function openExperienceModal(experienceId) {
-            const experience = SITE_DATA.destinos.find(d => d.id === experienceId);
+            const experience = SITE_DATA.Experiencias.find(d => d.id === experienceId);
             if (!experience) return;
-            
+
             const modal = document.getElementById('experience-modal');
             document.getElementById('experience-titulo').textContent = experience.nombre;
             document.getElementById('experience-tag').textContent = experience.tag;
             document.getElementById('experience-img').src = experience.img;
             document.getElementById('experience-descripcion').textContent = experience.descripcion;
-            document.getElementById('experience-duracion').textContent = experience.duracion;
-            
+
             const incluyelist = document.getElementById('experience-incluye');
             incluyelist.innerHTML = experience.incluye.map(item => `<li class="flex items-start gap-3"><span class="text-amber-600 mt-1">✓</span><span>${item}</span></li>`).join('');
-            
+
             const reservarBtn = document.getElementById('reservar-experiencia-btn');
             reservarBtn.onclick = () => reservarExperiencia(experience.nombre);
-            
+
             modal.classList.remove('hidden');
         }
 
@@ -680,4 +983,5 @@
         });
     </script>
 </body>
+
 </html>
