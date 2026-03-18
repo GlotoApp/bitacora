@@ -156,7 +156,7 @@
   "title": "Isla del Rosario (Full Aventura)",
   "badge": "Visitan con frecuencia",
   "tags": ["playa", "snorkel", "recomendado"],
-  "image": "https://www.hotelestequendama.com.co/assets/cache/uploads/tequendama-hoteles/destinos/cartagena/1920x1080/islas-rosario-alrededores-cartagena-tequendama-hoteles-colombia-1693995342.jpeg",
+  "image": "img/fullaventura.png",
   "short": "Recogida en hotel, tour panorámico por islas, oceanario y snorkel.",
   "features": [
     "Recogida en zona hotelera",
@@ -344,7 +344,7 @@
   "title": "Tour Bahía Catamarán",
   "badge": "Recomendado",
   "tags": ["nautico", "catamaran", "barra-libre", "bahia"],
-  "image": "https://www.bonavidacatamaranes.com/cache/uploads/1920x1036/RN40nN8DKypttC8CP5YQ5IjkoZgjRZ-metaY2F0YW1hcmFuLWF0YXJkZWNlci1ib25hdmlkYS1jYXJ0YWdlbmEtZGUtaW5kaWFzLWNvbG9tYmlhLmpwZw==-.jpg",
+  "image": "img/catamaran.jpeg",
   "short": "Navega por la bahía de Cartagena en un moderno catamarán con barra libre, música y snacks a bordo.",
   "features": [
     "Paseo de 2 horas por la bahía de Cartagena",
